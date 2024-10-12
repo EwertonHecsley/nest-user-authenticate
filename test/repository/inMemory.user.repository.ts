@@ -19,4 +19,10 @@ export class InMemoryTestUserRepository implements UserRepository {
     async findMany(): Promise<User[]> {
         return this.itens;
     }
+
+    async findById(id: number): Promise<User> {
+        const user = this.itens.find(element => element.id.valueId == id);
+
+        return user;
+    }
 }

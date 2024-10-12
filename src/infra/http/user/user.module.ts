@@ -7,6 +7,8 @@ import { DatabaseModule } from "src/infra/database/database.module";
 import { CreateUserController } from "./controllers/create.controller";
 import { ListUserUseCase } from "src/domain/user/use-case/list";
 import { ListUserController } from "./controllers/list.controller";
+import { FindUserUseCase } from "src/domain/user/use-case/find";
+import { FindUseController } from "./controllers/find.controller";
 
 @Module({
     imports: [
@@ -26,8 +28,15 @@ import { ListUserController } from "./controllers/list.controller";
                 return new ListUserUseCase(userRepository);
             },
             inject: [UserRepository]
+        },
+        {
+            provide: FindUserUseCase,
+            useFactory: (userRepository: UserRepository) => {
+                return new FindUserUseCase(userRepository);
+            },
+            inject: [UserRepository]
         }
     ],
-    controllers: [CreateUserController, ListUserController]
+    controllers: [CreateUserController, ListUserController, FindUseController]
 })
 export class UserModule { }
