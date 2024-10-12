@@ -5,6 +5,8 @@ import { CreateUserUseCase } from "src/domain/user/use-case/create";
 import { CryptoModule } from "src/infra/crypto/crypto.module";
 import { DatabaseModule } from "src/infra/database/database.module";
 import { CreateUserController } from "./controllers/create.controller";
+import { ListUserUseCase } from "src/domain/user/use-case/list";
+import { ListUserController } from "./controllers/list.controller";
 
 @Module({
     imports: [
@@ -17,8 +19,15 @@ import { CreateUserController } from "./controllers/create.controller";
                 return new CreateUserUseCase(userRepository, hashService);
             },
             inject: [UserRepository, HashService]
+        },
+        {
+            provide: ListUserUseCase,
+            useFactory: (userRepository: UserRepository) => {
+                return new ListUserUseCase(userRepository);
+            },
+            inject: [UserRepository]
         }
     ],
-    controllers: [CreateUserController]
+    controllers: [CreateUserController, ListUserController]
 })
 export class UserModule { }

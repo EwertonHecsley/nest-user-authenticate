@@ -15,4 +15,8 @@ export class InMemoryTestUserRepository implements UserRepository {
 
         return user;
     }
+
+    async findMany(): Promise<User[]> {
+        return this.itens;
+    }
 }
