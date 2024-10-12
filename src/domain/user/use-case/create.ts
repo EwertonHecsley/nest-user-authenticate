@@ -3,7 +3,7 @@ import { User } from "../entity/user.entity";
 import { Either, left, right } from "../errors/either.error";
 import { UserRepository } from "../repository/user.repository";
 import { HashService } from "../service/hash.service";
-import { Email } from "src/domain/shared/object-value/email";
+import { Email } from "../../shared/object-value/email";
 
 type Request = {
     name: string;

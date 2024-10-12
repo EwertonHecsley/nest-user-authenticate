@@ -1,4 +1,4 @@
-import { HashService } from "src/domain/user/service/hash.service";
+import { HashService } from "../../domain/user/service/hash.service";
 import { hash, compare } from "bcrypt";
 import { Injectable } from "@nestjs/common";
 

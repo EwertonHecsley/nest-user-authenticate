@@ -1,6 +1,6 @@
-import Entity from "src/core/generics/entity";
-import Identity from "src/core/generics/identity";
-import { Email } from "src/domain/shared/object-value/email";
+import Entity from "../../../core/generics/entity";
+import Identity from "../../../core/generics/identity";
+import { Email } from "../../shared/object-value/email";
 
 interface IUser {
     name: string;
