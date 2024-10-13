@@ -5,4 +5,5 @@ export abstract class UserRepository {
     abstract findByEmail(email: string): Promise<User>;
     abstract findMany(): Promise<User[]>;
     abstract findById(id: number): Promise<User>;
+    abstract save(entity: User): Promise<void>;
 }

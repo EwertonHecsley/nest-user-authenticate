@@ -34,4 +34,10 @@ export class UserPrismaRepository implements UserRepository {
 
         return user ? UserPrismaMapper.toDomain(user) : null;
     }
+
+    async save(entity: User): Promise<void> {
+        const data = UserPrismaMapper.toDatabase(entity);
+
+        await this.prismaService.user.update({ where: { id: entity.id.valueId }, data });
+    }
 }

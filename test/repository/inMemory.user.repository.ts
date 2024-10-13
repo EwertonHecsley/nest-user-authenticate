@@ -25,4 +25,10 @@ export class InMemoryTestUserRepository implements UserRepository {
 
         return user;
     }
+
+    async save(entity: User): Promise<void> {
+        const itemExist = this.itens.findIndex(element => element.id.valueId == entity.id.valueId);
+
+        this.itens[itemExist] = entity;
+    }
 }
