@@ -31,4 +31,12 @@ export class InMemoryTestUserRepository implements UserRepository {
 
         this.itens[itemExist] = entity;
     }
+
+    async delete(id: number): Promise<void> {
+        const itemExist = this.itens.findIndex(element => element.id.valueId == id);
+
+        if (itemExist > -1) {
+            this.itens.splice(itemExist, 1);
+        }
+    }
 }

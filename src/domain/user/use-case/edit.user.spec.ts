@@ -3,6 +3,7 @@ import { InMemoryTestUserRepository } from "../../../../test/repository/inMemory
 import { EditUserUseCase } from "../use-case/edit";
 import { User } from "../entity/user.entity";
 import { Email } from "../../shared/object-value/email";
+import { NotFoundException } from "@nestjs/common";
 
 describe('Teste para caso de uso do dominio User', () => {
     let userRepository: InMemoryTestUserRepository;
@@ -37,4 +38,17 @@ describe('Teste para caso de uso do dominio User', () => {
         expect(userRepository.itens[0].name).toBe('Name Test Editado');
         expect(userRepository.itens[0].email.value).toBe('teste@teste.editado.com');
     });
+
+    test('Deve dar erro Not Found ao passar um ID invalido', async () => {
+        //Garatindo que nao tenha um User com ID 2
+        expect(userRepository.itens.find(user => user.id.valueId === 2)).toBeUndefined();
+
+        const result = await useCase.execute({ id: 2 })
+
+        expect(result.isLeft()).toBeTruthy();
+        expect(result.value).toBeInstanceOf(NotFoundException);
+        if (result.isLeft()) {
+            expect(result.value.message).toBe('User not found');
+        }
+    })
 })
